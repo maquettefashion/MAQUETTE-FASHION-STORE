@@ -1,0 +1,257 @@
+{% extends 'base.html' %}
+
+{% block title %}The Fashion Hub - Shop the Latest Trends{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <div class="bg-primary bg-opacity-10 p-4 rounded-3 mb-4">
+        <div class="container py-3">
+            <h1 class="display-5 fw-bold">Fashion for Everyone</h1>
+            <p class="col-md-8 fs-4">Discover our latest collection of trendy clothing, footwear, and accessories.</p>
+            
+            <!-- Search Bar -->
+            <form class="mb-3" action="{{ url_for('index') }}" method="get">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control" placeholder="Search products..." value="{{ search_query }}">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="bi bi-search"></i> Search
+                    </button>
+                </div>
+                
+                <!-- Preserve other filter values in the form -->
+                <input type="hidden" name="category" value="{{ selected_category }}">
+                <input type="hidden" name="min_price" value="{{ min_price }}">
+                <input type="hidden" name="max_price" value="{{ max_price }}">
+                <input type="hidden" name="sort_by" value="{{ sort_by }}">
+            </form>
+            
+            <!-- Categories -->
+            <div class="d-flex flex-wrap category-scroll mb-3">
+                <a href="{{ url_for('index', search=search_query, min_price=min_price, max_price=max_price, sort_by=sort_by) }}" 
+                   class="category-pill me-2 mb-2 {% if selected_category == 'all' %}active bg-primary text-white{% else %}bg-light text-dark{% endif %}">
+                    All
+                </a>
+                {% for category in categories %}
+                <a href="{{ url_for('index', category=category.id, search=search_query, min_price=min_price, max_price=max_price, sort_by=sort_by) }}" 
+                   class="category-pill me-2 mb-2 {% if selected_category == category.id %}active bg-primary text-white{% else %}bg-light text-dark{% endif %}">
+                    {{ category.name }}
+                </a>
+                {% endfor %}
+            </div>
+            
+            <!-- Advanced Filters Button (for mobile) -->
+            <button class="btn btn-outline-primary d-md-none mb-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#advancedFilters" aria-expanded="false" aria-controls="advancedFilters">
+                <i class="bi bi-sliders"></i> Advanced Filters
+            </button>
+            
+            <!-- Advanced Filters -->
+            <div class="collapse d-md-block" id="advancedFilters">
+                <div class="card card-body mb-3">
+                    <form action="{{ url_for('index') }}" method="get">
+                        <div class="row g-3">
+                            <!-- Price Range -->
+                            <div class="col-md-6">
+                                <label class="form-label">Price Range</label>
+                                <div class="d-flex">
+                                    <input type="number" name="min_price" class="form-control me-2" placeholder="Min" value="{{ min_price }}">
+                                    <input type="number" name="max_price" class="form-control" placeholder="Max" value="{{ max_price }}">
+                                </div>
+                            </div>
+                            
+                            <!-- Sort By -->
+                            <div class="col-md-6">
+                                <label class="form-label">Sort By</label>
+                                <select name="sort_by" class="form-select">
+                                    <option value="default" {% if sort_by == 'default' %}selected{% endif %}>Default</option>
+                                    <option value="price_low" {% if sort_by == 'price_low' %}selected{% endif %}>Price: Low to High</option>
+                                    <option value="price_high" {% if sort_by == 'price_high' %}selected{% endif %}>Price: High to Low</option>
+                                    <option value="rating" {% if sort_by == 'rating' %}selected{% endif %}>Highest Rated</option>
+                                    <option value="name" {% if sort_by == 'name' %}selected{% endif %}>Name: A-Z</option>
+                                </select>
+                            </div>
+                            
+                            <div class="col-12">
+                                <!-- Preserve other filter values in the form -->
+                                <input type="hidden" name="search" value="{{ search_query }}">
+                                <input type="hidden" name="category" value="{{ selected_category }}">
+                                
+                                <button type="submit" class="btn btn-primary">Apply Filters</button>
+                                <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">Reset Filters</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Active Filters -->
+    {% if search_query or min_price or max_price or sort_by != 'default' %}
+    <div class="mb-3">
+        <h6>Active Filters:</h6>
+        <div class="d-flex flex-wrap">
+            {% if search_query %}
+            <div class="filter-indicator">
+                <span>Search: {{ search_query }}</span>
+                <a href="{{ url_for('index', category=selected_category, min_price=min_price, max_price=max_price, sort_by=sort_by) }}" class="ms-2 text-decoration-none"><i class="bi bi-x"></i></a>
+            </div>
+            {% endif %}
+            
+            {% if min_price %}
+            <div class="filter-indicator">
+                <span>Min Price: ${{ min_price }}</span>
+                <a href="{{ url_for('index', category=selected_category, search=search_query, max_price=max_price, sort_by=sort_by) }}" class="ms-2 text-decoration-none"><i class="bi bi-x"></i></a>
+            </div>
+            {% endif %}
+            
+            {% if max_price %}
+            <div class="filter-indicator">
+                <span>Max Price: ${{ max_price }}</span>
+                <a href="{{ url_for('index', category=selected_category, search=search_query, min_price=min_price, sort_by=sort_by) }}" class="ms-2 text-decoration-none"><i class="bi bi-x"></i></a>
+            </div>
+            {% endif %}
+            
+            {% if sort_by != 'default' %}
+            <div class="filter-indicator">
+                <span>Sort by: 
+                {% if sort_by == 'price_low' %}Price: Low to High
+                {% elif sort_by == 'price_high' %}Price: High to Low
+                {% elif sort_by == 'rating' %}Highest Rated
+                {% elif sort_by == 'name' %}Name: A-Z
+                {% endif %}
+                </span>
+                <a href="{{ url_for('index', category=selected_category, search=search_query, min_price=min_price, max_price=max_price) }}" class="ms-2 text-decoration-none"><i class="bi bi-x"></i></a>
+            </div>
+            {% endif %}
+            
+            <a href="{{ url_for('index') }}" class="btn btn-sm btn-outline-secondary">Clear All</a>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Install App Banner (visible only on mobile when not installed) -->
+    <div id="install-banner" class="card mb-4 d-none">
+        <div class="card-body p-3">
+            <div class="d-flex align-items-center">
+                <div class="flex-shrink-0">
+                    <img src="{{ url_for('static', filename='icons/icon-192x192.png') }}" alt="App Icon" class="rounded" width="64" height="64">
+                </div>
+                <div class="flex-grow-1 ms-3">
+                    <h5 class="mb-1">Install The Fashion Hub</h5>
+                    <p class="mb-2 text-muted">Get our app for a better shopping experience!</p>
+                    <button id="install-button" class="btn btn-primary btn-sm">
+                        <i class="bi bi-download"></i> Install Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Count -->
+    <div class="mb-3">
+        <p class="text-muted">Showing {{ products|length }} product{% if products|length != 1 %}s{% endif %}</p>
+    </div>
+    
+    <!-- Products Section -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+        {% for product in products %}
+        <div class="col">
+            <div class="card product-card h-100">
+                <div class="product-img-placeholder">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ product.name }}" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>{{ product.name }}</title>
+                        <rect width="100%" height="100%" fill="#868e96"></rect>
+                        <text x="50%" y="50%" fill="#dee2e6" dy=".3em">{{ product.name }}</text>
+                    </svg>
+                </div>
+                <div class="card-body d-flex flex-column">
+                    <span class="badge bg-secondary mb-2">{{ product.category }}</span>
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="text-primary fw-bold">${{ "%.2f"|format(product.price) }}</span>
+                        <div class="rating">
+                            {% for i in range(1, 6) %}
+                                {% if i <= product.rating|int %}
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                {% elif i <= (product.rating + 0.5)|int %}
+                                    <i class="bi bi-star-half text-warning"></i>
+                                {% else %}
+                                    <i class="bi bi-star text-warning"></i>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <p class="card-text">{{ product.description|truncate(100) }}</p>
+                    <div class="mt-auto d-flex">
+                        <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn btn-outline-primary flex-grow-1 me-2">View Details</a>
+                        <button class="btn btn-primary add-to-cart-btn" 
+                                data-product-id="{{ product.id }}" 
+                                data-product-name="{{ product.name }}" 
+                                data-product-price="{{ product.price }}" 
+                                data-product-image="{{ product.image }}">
+                            <i class="bi bi-cart-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    {% if not products %}
+    <div class="text-center py-5">
+        <i class="bi bi-x-circle display-1 text-muted"></i>
+        <h2 class="mt-3">No products found</h2>
+        <p class="text-muted">We couldn't find any products matching your criteria.</p>
+        <a href="{{ url_for('index') }}" class="btn btn-primary mt-3">View All Products</a>
+    </div>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Show the install banner if the PWA is installable
+document.addEventListener('DOMContentLoaded', () => {
+    const installBanner = document.getElementById('install-banner');
+    const installButton = document.getElementById('install-button');
+    
+    // Don't show if already installed
+    if (window.matchMedia('(display-mode: standalone)').matches || 
+        window.matchMedia('(display-mode: fullscreen)').matches ||
+        window.navigator.standalone) {
+        return;
+    }
+    
+    // Show the banner if the beforeinstallprompt event has been captured
+    window.addEventListener('beforeinstallprompt', (e) => {
+        // Prevent Chrome 76+ from automatically showing the prompt
+        e.preventDefault();
+        // Store the event so it can be triggered later
+        window.deferredPrompt = e;
+        // Show the banner
+        if (installBanner) {
+            installBanner.classList.remove('d-none');
+        }
+        
+        if (installButton) {
+            installButton.addEventListener('click', () => {
+                // Hide the banner
+                installBanner.classList.add('d-none');
+                // Show the install prompt
+                window.deferredPrompt.prompt();
+                
+                // Wait for the user to respond
+                window.deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    } else {
+                        console.log('User dismissed the install prompt');
+                    }
+                    window.deferredPrompt = null;
+                });
+            });
+        }
+    });
+});
+</script>
+{% endblock %}

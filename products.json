@@ -1,0 +1,166 @@
+{
+  "categories": [
+    {
+      "id": "clothing",
+      "name": "Clothing"
+    },
+    {
+      "id": "footwear",
+      "name": "Footwear"
+    },
+    {
+      "id": "accessories",
+      "name": "Accessories"
+    },
+    {
+      "id": "jewelry",
+      "name": "Jewelry"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Classic White T-Shirt",
+      "description": "A timeless white t-shirt made from 100% organic cotton. Perfect for everyday wear with a comfortable fit and durability that lasts through multiple washes.",
+      "price": 19.99,
+      "category": "clothing",
+      "image": "tshirt.svg",
+      "sizes": ["XS", "S", "M", "L", "XL"],
+      "colors": ["White", "Black", "Gray"],
+      "rating": 4.5,
+      "featured": true
+    },
+    {
+      "id": 2,
+      "name": "Slim-Fit Jeans",
+      "description": "Modern slim-fit jeans with a touch of stretch for maximum comfort. Features a classic five-pocket design and is perfect for casual outings.",
+      "price": 49.99,
+      "category": "clothing",
+      "image": "jeans.svg",
+      "sizes": ["28", "30", "32", "34", "36"],
+      "colors": ["Blue", "Black", "Gray"],
+      "rating": 4.3,
+      "featured": true
+    },
+    {
+      "id": 3,
+      "name": "Leather Sneakers",
+      "description": "Premium leather sneakers with a minimalist design. Features cushioned insoles and rubber outsoles for all-day comfort and durability.",
+      "price": 79.99,
+      "category": "footwear",
+      "image": "sneakers.svg",
+      "sizes": ["7", "8", "9", "10", "11", "12"],
+      "colors": ["White", "Black", "Brown"],
+      "rating": 4.7,
+      "featured": true
+    },
+    {
+      "id": 4,
+      "name": "Casual Dress Shirt",
+      "description": "A versatile button-up shirt that transitions effortlessly from office to casual settings. Made from breathable cotton with a modern cut.",
+      "price": 39.99,
+      "category": "clothing",
+      "image": "shirt.svg",
+      "sizes": ["S", "M", "L", "XL"],
+      "colors": ["Blue", "White", "Pink"],
+      "rating": 4.2,
+      "featured": false
+    },
+    {
+      "id": 5,
+      "name": "Leather Belt",
+      "description": "Genuine leather belt with a classic buckle design. A timeless accessory that adds sophistication to any outfit.",
+      "price": 29.99,
+      "category": "accessories",
+      "image": "belt.svg",
+      "sizes": ["32", "34", "36", "38", "40"],
+      "colors": ["Brown", "Black"],
+      "rating": 4.6,
+      "featured": false
+    },
+    {
+      "id": 6,
+      "name": "Silver Minimalist Watch",
+      "description": "A sleek, minimalist watch with a stainless steel case and band. Features a quartz movement and water resistance up to 30 meters.",
+      "price": 129.99,
+      "category": "accessories",
+      "image": "watch.svg",
+      "sizes": ["One Size"],
+      "colors": ["Silver", "Gold", "Rose Gold"],
+      "rating": 4.8,
+      "featured": true
+    },
+    {
+      "id": 7,
+      "name": "Wool Beanie",
+      "description": "Soft, warm beanie made from premium wool blend. Perfect for cold weather with a comfortable fit and stylish look.",
+      "price": 19.99,
+      "category": "accessories",
+      "image": "beanie.svg",
+      "sizes": ["One Size"],
+      "colors": ["Black", "Gray", "Navy"],
+      "rating": 4.4,
+      "featured": false
+    },
+    {
+      "id": 8,
+      "name": "Ankle Boots",
+      "description": "Stylish ankle boots with genuine leather upper and rubber sole. Features a side zipper for easy on and off.",
+      "price": 89.99,
+      "category": "footwear",
+      "image": "boots.svg",
+      "sizes": ["6", "7", "8", "9", "10"],
+      "colors": ["Black", "Brown", "Tan"],
+      "rating": 4.5,
+      "featured": true
+    },
+    {
+      "id": 9,
+      "name": "Silver Pendant Necklace",
+      "description": "Elegant sterling silver pendant necklace featuring a minimalist design. Adds a touch of sophistication to any outfit.",
+      "price": 59.99,
+      "category": "jewelry",
+      "image": "necklace.svg",
+      "sizes": ["18 inch", "20 inch", "24 inch"],
+      "colors": ["Silver"],
+      "rating": 4.7,
+      "featured": true
+    },
+    {
+      "id": 10,
+      "name": "Canvas Tote Bag",
+      "description": "Durable canvas tote bag with reinforced handles. Perfect for shopping, beach trips, or as a casual everyday bag.",
+      "price": 24.99,
+      "category": "accessories",
+      "image": "tote.svg",
+      "sizes": ["One Size"],
+      "colors": ["Natural", "Black", "Navy"],
+      "rating": 4.3,
+      "featured": false
+    },
+    {
+      "id": 11,
+      "name": "Stainless Steel Earrings",
+      "description": "Simple yet elegant stainless steel hoop earrings. Hypoallergenic and suitable for everyday wear.",
+      "price": 19.99,
+      "category": "jewelry",
+      "image": "earrings.svg",
+      "sizes": ["Small", "Medium", "Large"],
+      "colors": ["Silver", "Gold"],
+      "rating": 4.5,
+      "featured": false
+    },
+    {
+      "id": 12,
+      "name": "Denim Jacket",
+      "description": "Classic denim jacket with button closure and multiple pockets. A versatile piece that never goes out of style.",
+      "price": 69.99,
+      "category": "clothing",
+      "image": "jacket.svg",
+      "sizes": ["S", "M", "L", "XL"],
+      "colors": ["Blue", "Black", "Light Wash"],
+      "rating": 4.6,
+      "featured": true
+    }
+  ]
+}
